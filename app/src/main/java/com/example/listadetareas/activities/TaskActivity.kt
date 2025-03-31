@@ -14,6 +14,7 @@ class TaskActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityTaskBinding
     lateinit var taskDAO: TaskDAO
+    lateinit var task: Task
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,12 +29,26 @@ class TaskActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val id = intent.getLongExtra("TASK_ID", -1L)
         taskDAO = TaskDAO(this)
+        if (id != -1L) {
+            task = taskDAO.findById(id)!!
+            binding.titleEditText.setText(task.title)
+            binding.descriptionEditText.setText(task.description)
+        }else{
+            task = Task(-1L, "", "")
+        }
 
         binding.safeButton.setOnClickListener {
             val title = binding.titleEditText.text.toString()
-            val task = Task(-1L, title)
-            taskDAO.insert(task)
+            val description = binding.descriptionEditText.text.toString()
+            task.title = title
+            task.description = description
+            if(id!=-1L){
+                taskDAO.update(task)
+            }else{
+                taskDAO.insert(task)
+            }
             finish()
         }
     }

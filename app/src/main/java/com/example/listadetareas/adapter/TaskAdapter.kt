@@ -8,8 +8,11 @@ import com.example.listadetareas.data.Task
 import com.example.listadetareas.databinding.ItemTaskBinding
 
 
-class TaskAdapter(var items: List<Task>, val onClick: (Int) -> Unit) :
-    Adapter<SuperheroViewHolder>() {
+class TaskAdapter(
+    var items: List<Task>,
+    val onClick: (Int) -> Unit,
+    val onDelete: (Int)-> Unit)
+    : Adapter<SuperheroViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuperheroViewHolder {
         val binding = ItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,7 +27,11 @@ class TaskAdapter(var items: List<Task>, val onClick: (Int) -> Unit) :
         holder.itemView.setOnClickListener {
             onClick(position)
         }
+        holder.binding.deleteButton.setOnClickListener {
+            onDelete(position)
+        }
     }
+
     fun updateItems(items: List<Task>) {
         this.items = items
         notifyDataSetChanged()
@@ -35,6 +42,7 @@ class SuperheroViewHolder(val binding: ItemTaskBinding) : ViewHolder(binding.roo
 
     fun render(task: Task) {
         binding.titleTextView.text = task.title
+        binding.titleTextView.text = task.description
         binding.doneCheckBox.isChecked = task.done
     }
 }

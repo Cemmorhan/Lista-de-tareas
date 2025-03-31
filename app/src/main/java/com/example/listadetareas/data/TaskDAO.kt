@@ -16,6 +16,7 @@ class TaskDAO(context: Context) {
         // Create a new map of values, where column names are the keys
         val values = ContentValues().apply {
             put(Task.COLUMN_NAME_TITLE, task.title)
+            put(Task.COLUMN_NAME_DESCRIPTION, task.description)
             put(Task.COLUMN_NAME_DONE, task.done)
         }
 
@@ -38,6 +39,7 @@ class TaskDAO(context: Context) {
         // Create a new map of values, where column names are the keys
         val values = ContentValues().apply {
             put(Task.COLUMN_NAME_TITLE, task.title)
+            put(Task.COLUMN_NAME_DESCRIPTION, task.description)
             put(Task.COLUMN_NAME_DONE, task.done)
         }
 
@@ -72,6 +74,7 @@ class TaskDAO(context: Context) {
         val projection = arrayOf(
             Task.COLUMN_NAME_ID,
             Task.COLUMN_NAME_TITLE,
+            Task.COLUMN_NAME_DESCRIPTION,
             Task.COLUMN_NAME_DONE
         )
 
@@ -93,9 +96,10 @@ class TaskDAO(context: Context) {
             if (cursor.moveToNext()) {
                 val id = cursor.getLong(cursor.getColumnIndexOrThrow(Task.COLUMN_NAME_ID))
                 val title = cursor.getString(cursor.getColumnIndexOrThrow(Task.COLUMN_NAME_TITLE))
+                val description = cursor.getString(cursor.getColumnIndexOrThrow(Task.COLUMN_NAME_DESCRIPTION))
                 val done = cursor.getInt(cursor.getColumnIndexOrThrow(Task.COLUMN_NAME_DONE)) != 0
 
-                task = Task(id, title, done)
+                task = Task(id, title,description, done)
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -112,6 +116,7 @@ class TaskDAO(context: Context) {
         val projection = arrayOf(
             Task.COLUMN_NAME_ID,
             Task.COLUMN_NAME_TITLE,
+            Task.COLUMN_NAME_DESCRIPTION,
             Task.COLUMN_NAME_DONE
         )
 
@@ -124,16 +129,17 @@ class TaskDAO(context: Context) {
                 null,              // The columns for the WHERE clause
                 null,          // The values for the WHERE clause
                 null,                   // don't group the rows
-                null,                   // don't filter by row groups
+                null,                   // don' t filter by row groups
                 null               // The sort order
             )
 
             while (cursor.moveToNext()) {
                 val id = cursor.getLong(cursor.getColumnIndexOrThrow(Task.COLUMN_NAME_ID))
                 val title = cursor.getString(cursor.getColumnIndexOrThrow(Task.COLUMN_NAME_TITLE))
+                val description = cursor.getString(cursor.getColumnIndexOrThrow(Task.COLUMN_NAME_DESCRIPTION))
                 val done = cursor.getInt(cursor.getColumnIndexOrThrow(Task.COLUMN_NAME_DONE)) != 0
 
-                val task = Task(id, title, done)
+                val task = Task(id, title, description, done)
                 taskList.add(task)
             }
         } catch (e: Exception) {

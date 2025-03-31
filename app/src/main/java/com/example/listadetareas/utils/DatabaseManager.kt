@@ -10,12 +10,13 @@ class DatabaseManager(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
 
     companion object {
         const val DATABASE_NAME = "reminders.db"
-        const val DATABASE_VERSION = 1
+        const val DATABASE_VERSION = 2
 
         private const val SQL_CREATE_TABLE_TASK =
             "CREATE TABLE ${Task.TABLE_NAME} (" +
                     "${Task.COLUMN_NAME_ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "${Task.COLUMN_NAME_TITLE} TEXT," +
+                    "${Task.COLUMN_NAME_DESCRIPTION} TEXT," +
                     "${Task.COLUMN_NAME_DONE} BOOLEAN)"
 
         private const val SQL_DROP_TABLE_TASK = "DROP TABLE IF EXISTS ${Task.TABLE_NAME}"
