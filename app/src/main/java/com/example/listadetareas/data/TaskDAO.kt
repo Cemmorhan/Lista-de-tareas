@@ -130,7 +130,8 @@ class TaskDAO(context: Context) {
                 null,          // The values for the WHERE clause
                 null,                   // don't group the rows
                 null,                   // don' t filter by row groups
-                null               // The sort order
+                Task.COLUMN_NAME_DONE           // The sort order
+                // si quiero ordenarlo al reves, pongo "${Task.COLUMN_NAME_DONE} DESC"
             )
 
             while (cursor.moveToNext()) {

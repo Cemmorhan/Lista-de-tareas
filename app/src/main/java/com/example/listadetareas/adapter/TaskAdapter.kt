@@ -11,17 +11,18 @@ import com.example.listadetareas.databinding.ItemTaskBinding
 class TaskAdapter(
     var items: List<Task>,
     val onClick: (Int) -> Unit,
-    val onDelete: (Int)-> Unit)
-    : Adapter<SuperheroViewHolder>() {
+    val onDelete: (Int)-> Unit,
+    val onCheck: (Int) -> Unit)
+    : Adapter<TaskViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuperheroViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val binding = ItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SuperheroViewHolder(binding)
+        return TaskViewHolder(binding)
     }
 
     override fun getItemCount(): Int = items.size
 
-    override fun onBindViewHolder(holder: SuperheroViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = items[position]
         holder.render(task)
         holder.itemView.setOnClickListener {
@@ -29,6 +30,12 @@ class TaskAdapter(
         }
         holder.binding.deleteButton.setOnClickListener {
             onDelete(position)
+        }
+        holder.binding.doneCheckBox.setOnCheckedChangeListener { _, _ ->
+            if(holder.binding.doneCheckBox.isPressed) {
+                onCheck(position)
+
+            }
         }
     }
 
@@ -38,11 +45,12 @@ class TaskAdapter(
     }
 }
 
-class SuperheroViewHolder(val binding: ItemTaskBinding) : ViewHolder(binding.root) {
+class TaskViewHolder(val binding: ItemTaskBinding) : ViewHolder(binding.root) {
 
     fun render(task: Task) {
         binding.titleTextView.text = task.title
-        binding.titleTextView.text = task.description
+        //esto es si quisiera mostrar la descripcion tambien, pero tendria que ponerle un espacio donde mostrarlo si o si
+        //binding.descriptionTextView.text = task.description
         binding.doneCheckBox.isChecked = task.done
     }
 }
