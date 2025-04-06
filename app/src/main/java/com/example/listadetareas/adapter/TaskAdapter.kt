@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.listadetareas.data.Task
 import com.example.listadetareas.databinding.ItemTaskBinding
+import com.example.reminderslist.utils.addStrikethrough
 
 
 class TaskAdapter(
@@ -48,7 +49,11 @@ class TaskAdapter(
 class TaskViewHolder(val binding: ItemTaskBinding) : ViewHolder(binding.root) {
 
     fun render(task: Task) {
-        binding.titleTextView.text = task.title
+        if (task.done) {
+            binding.titleTextView.text = task.title.addStrikethrough()
+        } else {
+            binding.titleTextView.text = task.title
+        }
         //esto es si quisiera mostrar la descripcion tambien, pero tendria que ponerle un espacio donde mostrarlo si o si
         //binding.descriptionTextView.text = task.description
         binding.doneCheckBox.isChecked = task.done

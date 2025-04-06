@@ -4,7 +4,8 @@ class Task (
     var id: Long,
     var title: String,
     var description: String,
-    var done: Boolean = false
+    var done: Boolean = false,
+    var category: Category
 
 ) {
 
@@ -16,5 +17,6 @@ class Task (
         const val COLUMN_NAME_TITLE = "title"
         const val COLUMN_NAME_DESCRIPTION = "description"
         const val COLUMN_NAME_DONE = "done"
+        const val COLUMN_NAME_CATEGORY = "category"
     }
 }

@@ -12,7 +12,7 @@
         android:layout_margin="10dp"
         android:orientation="vertical"
         android:padding="10dp"
-        tools:context=".activities.TaskActivity">
+        tools:context=".activities.CategoryActivity">
 
         <TextView
             android:layout_width="match_parent"
@@ -23,26 +23,7 @@
             android:id="@+id/titleEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="¿Que tarea deseas agregar?" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Descripción" />
-
-        <EditText
-            android:id="@+id/descriptionEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="¿En que consiste tu tarea?" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:padding="10dp">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:hint="¿Cual es la categoría?" />
 
         <Button
             android:id="@+id/saveButton"
@@ -50,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="32dp"
-            android:text="Agregar" />
+            android:text="Crear" />
     </LinearLayout>
 
 
